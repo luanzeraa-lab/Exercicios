@@ -18,20 +18,36 @@ let alunos = [
      {ra: 122, name: "Maria", turma: "ADS",
      cursos: ["VueJS", "Ruby on Rails", "Node"]}];
 
+     //-----CADASTRO ALUNOS
      app.post('/alunos', (req, res) =>{
         alunos.push(req.body);
         res.send(alunos);
      })
 
-     app.post('/alunos', (req,res) =>{
-        const index = alunos.findIndex(aluno => aluno.ra == req.query.ra)
-        alunos[index] = 
+      //---------CADASTRO CURSOS
+     app.post('/alunos/cursos', (req,res) =>{
+      const {ra} = req.query;
+      const {cursos} = req.body;
+      const index = alunos.findIndex(aluno => aluno.ra == ra)
+
+      alunos[index].cursos.push(...cursos);
+      res.send(alunos[index]);
      })
 
+     //-----------ALTERAR ALUNO
      app.put('/alunos', (req,res) =>{
         const index = alunos.findIndex(aluno => aluno.ra == req.query.ra)
         alunos[index] = {name: req.body.name, turma: req.body.turma}
         res.send(JSON.stringify(alunos));
+     })
+
+     //-----------ALTERAR CURSO
+     app.put('/alunos/cursos', (req, res) =>{
+      const {ra} = req.query;
+      const {cursos} = req.body;
+      const index = alunos.findIndex(aluno => aluno.ra == ra)
+      alunos[index].cursos = {cursos: cursos}
+      res.send(alunos[index])
      })
      app.delete('/alunos', (req, res) =>{
         const index = alunos.findIndex(aluno => aluno.ra == req.query.ra)
