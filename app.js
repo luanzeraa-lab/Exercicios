@@ -30,6 +30,9 @@ let alunos = [
       const {cursos} = req.body;
       const index = alunos.findIndex(aluno => aluno.ra == ra)
 
+      if (!alunos[index].cursos){
+         alunos[index].cursos = [];
+      }
       alunos[index].cursos.push(...cursos);
       res.send(alunos[index]);
      })
@@ -49,11 +52,16 @@ let alunos = [
       alunos[index].cursos = {cursos: cursos}
       res.send(alunos[index])
      })
+
+     //-----------DELETAR ALUNO
      app.delete('/alunos', (req, res) =>{
         const index = alunos.findIndex(aluno => aluno.ra == req.query.ra)
         alunos.splice(index, 1)
         res.send(JSON.stringify(alunos))
      })
+
+     //----------DELETAR CURSO
+     app.delete('/alunos/curso')
 
 
 
