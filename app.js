@@ -66,17 +66,16 @@ let alunos = [
      //----------DELETAR CURSO
    app.delete('/alunos/cursos/cursosdeletar', (req, res) =>{
          const {ra} = req.query;
-         const cursoDeletado = req.body(cursos);
-         res.send(cursoDeletado)
-         console.log(cursoDeletado);
+         const cursoDeletado = req.body.cursos;
          const index = alunos.findIndex(aluno => aluno.ra == ra)
    
-         for (i = 0; i < alunos[index].cursos.length; i++){
+         for (let i = 0; i < alunos[index].cursos.length; i++){
             if (alunos[index].cursos[i] == cursoDeletado){
-               alunos[index].cursos.splice(i, 1)
+               alunos[index].cursos.splice(i, 1);
+               break;
             }
          }
-         res.send(JSON.stringify(alunos))
+         res.send(alunos);
       });
 
       //--------------MOSTRAR ALUNOS---okk
