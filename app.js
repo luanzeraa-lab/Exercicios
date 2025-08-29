@@ -43,7 +43,7 @@ let alunos = [
       const {name, turma} = req.body;
         const index = alunos.findIndex(aluno => aluno.ra == req.query.ra)
         alunos[index] = {ra : ra, name: req.body.name, turma: req.body.turma}
-        res.send(JSON.stringify(alunos));
+        res.send(alunos[index]);
      })
 
      //-----------ALTERAR CURSO
@@ -60,7 +60,7 @@ let alunos = [
       const {ra} = req.query;
         const index = alunos.findIndex(aluno => aluno.ra == req.query.ra)
         alunos.splice(index, 1)
-        res.send(JSON.stringify(alunos))
+        res.send(alunos)
      })
 
      //----------DELETAR CURSO
@@ -75,7 +75,7 @@ let alunos = [
                break;
             }
          }
-         res.send(alunos);
+         res.send(alunos[index]);
       });
 
       //--------------MOSTRAR ALUNOS---okk
